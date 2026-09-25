@@ -1,0 +1,14 @@
+# Dependencias de Node
+node_modules/
+
+# Logs de error y ejecuciones
+*.log
+npm-debug.log*
+
+# Configuraciones locales de VS Code
+.vscode/
+
+# Archivos del sistema operativo
+Thumbs.db
+Desktop.ini
+.DS_Store
