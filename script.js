@@ -1,7 +1,7 @@
 const gamesContainer = document.getElementById('games-container');
 const searchInput = document.getElementById('search-input');
 const statusMessage = document.getElementById('status-message');
-const variableInutil = 123; // Variable no usada para forzar un error de ESLint
+
 let allGames = [];
 
 async function fetchGamesData() {
