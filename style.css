@@ -6,8 +6,8 @@
 }
 
 body {
-  background-color: #1e1e2e;
-  color: #cdd6f4;
+  background-color: #f4f7f6;
+  color: #333;
   padding: 20px;
 }
 
@@ -17,12 +17,8 @@ header {
 }
 
 header h1 {
-  color: #89b4fa;
+  color: #2c3e50;
   margin-bottom: 8px;
-}
-
-header p {
-  color: #a6adc8;
 }
 
 .search-section {
@@ -36,79 +32,62 @@ header p {
   max-width: 400px;
   padding: 12px 16px;
   font-size: 16px;
-  border: 2px solid #45475a;
+  border: 2px solid #ccc;
   border-radius: 8px;
-  background-color: #313244;
-  color: #f5e0dc;
   outline: none;
   transition: border-color 0.3s;
 }
 
 #search-input:focus {
-  border-color: #89b4fa;
+  border-color: #3498db;
 }
 
 .status-message {
   text-align: center;
   font-size: 18px;
   font-weight: bold;
-  color: #a6adc8;
+  color: #555;
   margin: 20px 0;
 }
 
 .status-message.error {
-  color: #f38ba8;
+  color: #e74c3c;
 }
 
-.games-grid {
+.pokemon-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
-  max-width: 1100px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
-.game-card {
-  background-color: #313244;
+.pokemon-card {
+  background-color: #ffffff;
   border-radius: 10px;
   padding: 15px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
-.game-card:hover {
+.pokemon-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(137, 180, 250, 0.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.game-card img {
-  width: 100%;
-  border-radius: 6px;
-  margin-bottom: 10px;
+.pokemon-card img {
+  width: 96px;
+  height: 96px;
 }
 
-.game-card h3 {
-  margin: 8px 0;
-  color: #89b4fa;
-  font-size: 18px;
+.pokemon-card h3 {
+  text-transform: capitalize;
+  margin: 10px 0 5px;
+  color: #2c3e50;
 }
 
-.game-card .genre {
-  display: inline-block;
-  background-color: #45475a;
-  color: #a6e3a1;
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 12px;
-  margin-top: 5px;
-}
-
-.game-card .platform {
-  font-size: 12px;
-  color: #bac2de;
-  margin-top: 8px;
+.pokemon-card p {
+  font-size: 14px;
+  color: #7f8c8d;
 }

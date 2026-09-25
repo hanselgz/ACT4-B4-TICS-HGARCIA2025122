@@ -1,33 +1,30 @@
-const gamesContainer = document.getElementById('games-container');
+const pokemonContainer = document.getElementById('pokemon-container');
 const searchInput = document.getElementById('search-input');
 const statusMessage = document.getElementById('status-message');
 
-let allGames = [];
+let allPokemon = [];
 
-async function fetchGamesData() {
+async function fetchPokemonData() {
   try {
-    statusMessage.textContent = 'Cargando videojuegos...';
+    statusMessage.textContent = 'Cargando Pokémon...';
     statusMessage.classList.remove('error');
 
-    const response = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=60');
-
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=50');
     if (!response.ok) {
-      throw new Error('No se pudo conectar con la API de videojuegos');
+      throw new Error('No se pudo conectar con la API');
     }
 
     const data = await response.json();
-    
-    allGames = data.slice(0, 24).map((game) => ({
-      id: game.dealID,
-      title: game.title,
-      price: game.normalPrice,
-      salePrice: game.salePrice,
-      thumb: game.thumb,
-      rating: game.steamRatingText || 'Muy Positivo'
-    }));
+    const pokemonList = data.results;
 
+    const detailPromises = pokemonList.map(async (pokemon) => {
+      const res = await fetch(pokemon.url);
+      return res.json();
+    });
+
+    allPokemon = await Promise.all(detailPromises);
     statusMessage.textContent = '';
-    displayGames(allGames);
+    displayPokemon(allPokemon);
   } catch (error) {
     statusMessage.textContent = 'Error al cargar los datos. Intenta nuevamente.';
     statusMessage.classList.add('error');
@@ -35,41 +32,38 @@ async function fetchGamesData() {
   }
 }
 
-function displayGames(gamesList) {
-  gamesContainer.innerHTML = '';
+function displayPokemon(pokemonList) {
+  pokemonContainer.innerHTML = '';
 
-  if (gamesList.length === 0) {
-    statusMessage.textContent = 'No se encontraron videojuegos.';
+  if (pokemonList.length === 0) {
+    statusMessage.textContent = 'No se encontraron Pokémon.';
     return;
   }
 
   statusMessage.textContent = '';
 
-  gamesList.forEach((game) => {
+  pokemonList.forEach((pokemon) => {
     const card = document.createElement('div');
-    card.classList.add('game-card');
+    card.classList.add('pokemon-card');
 
     card.innerHTML = `
-      <div>
-        <img src="${game.thumb}" alt="${game.title}">
-        <h3>${game.title}</h3>
-        <span class="genre">Reseñas: ${game.rating}</span>
-      </div>
-      <p class="platform">Precio Habitual: $${game.price} USD</p>
+      <img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">
+      <h3>${pokemon.name}</h3>
+      <p>#${pokemon.id}</p>
     `;
 
-    gamesContainer.appendChild(card);
+    pokemonContainer.appendChild(card);
   });
 }
 
-function filterGames() {
+function filterPokemon() {
   const searchTerm = searchInput.value.toLowerCase().trim();
-  const filtered = allGames.filter((game) =>
-    game.title.toLowerCase().includes(searchTerm)
+  const filtered = allPokemon.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(searchTerm)
   );
-  displayGames(filtered);
+  displayPokemon(filtered);
 }
 
-searchInput.addEventListener('input', filterGames);
+searchInput.addEventListener('input', filterPokemon);
 
-fetchGamesData();
+fetchPokemonData();
