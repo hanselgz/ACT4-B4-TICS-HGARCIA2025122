@@ -1,13 +1,17 @@
 {
   "name": "hgarcia-desarrollo-web",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
-  "main": "index.js",
+  "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "devDependencies": {
+    "eslint": "^9.x.x",
+    "globals": "^17.12.0"
+  }
 }
