@@ -1,7 +1,7 @@
 const gamesContainer = document.getElementById('games-container');
 const searchInput = document.getElementById('search-input');
 const statusMessage = document.getElementById('status-message');
-
+const variableInutil = 123; // Variable no usada para forzar un error de ESLint
 let allGames = [];
 
 async function fetchGamesData() {
@@ -9,7 +9,6 @@ async function fetchGamesData() {
     statusMessage.textContent = 'Cargando videojuegos...';
     statusMessage.classList.remove('error');
 
-    // API pública y estable de ofertas de videojuegos populares (CheapShark)
     const response = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=60');
 
     if (!response.ok) {
